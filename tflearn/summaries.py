@@ -185,6 +185,10 @@ def get_value_from_summary_string(tag, summary_str):
     summ = summary_pb2.Summary()
     summ.ParseFromString(summary_str)
 
+    # acc:0 not change to acc_0 before.
+    if tag == 'acc:0':
+        tag = 'acc_0'
+
     for row in summ.value:
         if row.tag.endswith(tag):
             return float(row.simple_value)
